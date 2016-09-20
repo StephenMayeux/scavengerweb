@@ -6,6 +6,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
 
 import App from './components/app';
+import Signup from './containers/signup';
 import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
@@ -21,7 +22,9 @@ if (token) {
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={App} />
+      <Route path="/" component={App}>
+        <Route path="signup" component={Signup} />
+      </Route>
     </Router>
   </Provider>
   , document.querySelector('.render-target'));
