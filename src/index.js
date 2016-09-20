@@ -24,4 +24,4 @@ ReactDOM.render(
       <Route path="/" component={App} />
     </Router>
   </Provider>
-  , document.querySelector('.container'));
+  , document.querySelector('.render-target'));
