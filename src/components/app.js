@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 
+import Header from './header';
+
 class App extends Component {
   render() {
     return (
       <div>
-        <h2>Welcome!</h2>
-        {this.props.children}
+        <Header />
+        <div className="container">
+          {this.props.children}
+        </div>
       </div>
     );
   }
