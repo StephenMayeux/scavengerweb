@@ -29,7 +29,7 @@ class Signup extends Component {
               <legend>Create an account</legend>
               <div className="form-group">
                 <label>Name</label>
-                <input className="form-control" {...name} autofocus placeholder="John Smith" />
+                <input className="form-control" {...name} autoFocus placeholder="John Smith" />
                 {name.touched && name.error && <div>{name.error}</div>}
               </div>
               <div className="form-group">
@@ -53,8 +53,6 @@ class Signup extends Component {
               {this.renderAlert()}
               <button type="submit" className="btn btn-success">Create an account</button>
             </form>
-            <div className="btn-toolbar text-center">
-            </div>
           </div>
         </div>
         <p className="text-center">
