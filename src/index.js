@@ -8,6 +8,7 @@ import reduxThunk from 'redux-thunk';
 import App from './components/app';
 import Signup from './containers/signup';
 import Signin from './containers/signin';
+import Signout from './containers/signout';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
@@ -25,6 +26,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
+        <Route path="signout" component={Signout} />
       </Route>
     </Router>
   </Provider>

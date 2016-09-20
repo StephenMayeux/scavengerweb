@@ -9,7 +9,7 @@ class Header extends Component {
     if (this.props.authenticated) {
       return [
         <li key={1}><Link to="/edit" activeStyle={active}>Edit Profile</Link></li>,
-        <li key={2}><Link to="/signout" activeStyle={active}>Sign out</Link></li>
+        <li key={2}><Link to="/signout">Sign out</Link></li>
       ];
     } else {
       return [
