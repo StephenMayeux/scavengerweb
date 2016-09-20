@@ -6,19 +6,13 @@ const API_URL = 'http://localhost:3000';
 
 export function signinUser({ email, password }) {
   return function(dispatch) {
-    // submit email/password to api server
     axios.post(`${API_URL}/signin`, { email, password })
       .then(response => {
-        // if successful login, update state to show auth'd user
         dispatch({ type: AUTH_USER });
-        // save the jwt token
         localStorage.setItem('token', response.data.token);
-        // redirect to /feature route
         browserHistory.push('/feature');
       })
       .catch(() => {
-        // if bad login, show error message to user
-        // can dispatch other action creators!
         dispatch(authError('Bad Login Info'));
       });
   }
