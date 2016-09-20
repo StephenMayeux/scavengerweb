@@ -2,9 +2,24 @@ import React, { Component } from 'react';
 import { IndexLink, Link } from 'react-router';
 import { connect } from 'react-redux';
 
-export default class Header extends Component {
+const active = { borderBottomColor: '#3f51b5' };
+
+class Header extends Component {
+  renderRightMenu() {
+    if (this.props.authenticated) {
+      return [
+        <li key={1}><Link to="/edit" activeStyle={active}>Edit Profile</Link></li>,
+        <li key={2}><Link to="/signout" activeStyle={active}>Sign out</Link></li>
+      ];
+    } else {
+      return [
+        <li key={3}><Link to="/signin" activeStyle={active}>Sign in</Link></li>,
+        <li key={4}><Link to="/signup" activeStyle={active}>Sign up</Link></li>
+      ];
+    }
+  }
+
   render() {
-    const active = { borderBottomColor: '#3f51b5' };
     return (
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container">
@@ -22,8 +37,7 @@ export default class Header extends Component {
               <li><IndexLink to="/" activeStyle={active}>Home</IndexLink></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li><Link to="/signin" activeStyle={active}>Log in</Link></li>
-              <li><Link to="/signup" activeStyle={active}>Sign up</Link></li>
+              {this.renderRightMenu()}
             </ul>
           </div>
         </div>
@@ -31,3 +45,9 @@ export default class Header extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated }
+}
+
+export default connect(mapStateToProps)(Header);
