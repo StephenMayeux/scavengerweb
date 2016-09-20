@@ -22,7 +22,7 @@ export default class Header extends Component {
               <li><IndexLink to="/" activeStyle={active}>Home</IndexLink></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li><Link to="/login" activeStyle={active}>Log in</Link></li>
+              <li><Link to="/signin" activeStyle={active}>Log in</Link></li>
               <li><Link to="/signup" activeStyle={active}>Sign up</Link></li>
             </ul>
           </div>
