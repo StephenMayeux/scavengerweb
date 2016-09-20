@@ -55,3 +55,13 @@ export function fetchMessage() {
     });
   });
 }
+
+export function fetchProfiles() {
+  axios.get(`${API_URL}/profiles`)
+    .then(profiles => {
+      dispatch({
+        type: FETCH_PROFILES,
+        payload: profiles
+      });
+    });
+}
