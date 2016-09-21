@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE, FETCH_PROFILES } from './types';
+import { AUTH_USER,
+        UNAUTH_USER,
+        AUTH_ERROR,
+        FETCH_MESSAGE,
+        FETCH_PROFILES } from './types';
 
 const API_URL = 'http://localhost:3000';
 
@@ -59,9 +63,16 @@ export function fetchMessage() {
 
 export function fetchProfiles() {
   const response = axios.get(`${API_URL}/profiles`);
-
   return {
     type: FETCH_PROFILES,
+    payload: response
+  };
+}
+
+export function fetchOneProfile(id) {
+  const response = axios.get(`${API_URL}/profiles/${id}`);
+  return {
+    type: FETCH_ONE_PROFILE,
     payload: response
   };
 }
