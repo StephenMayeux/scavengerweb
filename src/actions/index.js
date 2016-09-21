@@ -4,7 +4,8 @@ import { AUTH_USER,
         UNAUTH_USER,
         AUTH_ERROR,
         FETCH_MESSAGE,
-        FETCH_PROFILES } from './types';
+        FETCH_PROFILES,
+        FETCH_ONE_PROFILE } from './types';
 
 const API_URL = 'http://localhost:3000';
 

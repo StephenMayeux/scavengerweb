@@ -7,7 +7,7 @@ export default function(state = INITIAL_STATE, action) {
     case FETCH_PROFILES:
       return { ...state, allProfiles: action.payload }
     case FETCH_ONE_PROFILE:
-      return { ...state, profile: action.payload }
+      return { ...state, profile: action.payload.data }
   }
   return state;
 }
