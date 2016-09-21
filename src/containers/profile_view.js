@@ -8,10 +8,19 @@ class ProfileView extends Component {
   }
 
   render() {
-    return (
-      <h3>{this.props.params.id}</h3>
-    );
+    if (!this.props.userProfile) {
+      return <div>Loading...</div>
+    } else {
+      const { name, email, city } = this.props.userProfile.data;
+      return (
+        <div>
+          <h3>{name}</h3>
+          <p className="lead">{email}</p>
+        </div>
+      );
+    }
   }
+
 }
 
 function mapStateToProps(state) {
