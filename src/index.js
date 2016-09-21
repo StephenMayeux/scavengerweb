@@ -9,6 +9,7 @@ import promise from 'redux-promise';
 import App from './components/app';
 import Profiles from './containers/profiles';
 import ProfileView from './containers/profile_view';
+import ProfileEdit from './containers/profile_edit'; // should be protected with HOC
 import Signup from './containers/signup';
 import Signin from './containers/signin';
 import Signout from './containers/signout';
@@ -31,7 +32,8 @@ ReactDOM.render(
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
         <Route path="signout" component={Signout} />
-        <Route path="/profiles/:id" component={ProfileView} />
+        <Route path="profiles/:id" component={ProfileView} />
+        <Route path="edit" component={ProfileEdit} />
       </Route>
     </Router>
   </Provider>
