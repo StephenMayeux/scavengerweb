@@ -16,7 +16,7 @@ export function signinUser({ email, password }) {
         console.log(response);
         dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);
-        browserHistory.push('/feature');
+        browserHistory.push('/edit');
       })
       .catch(() => {
         dispatch(authError('Bad Login Info'));
@@ -30,7 +30,7 @@ export function signupUser({ name, email, password }) {
       .then(response => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);
-        browserHistory.push('/feature');
+        browserHistory.push('/edit');
       })
       .catch(() => {
         dispatch(authError('Email in use'));
