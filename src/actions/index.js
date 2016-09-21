@@ -13,8 +13,8 @@ export function signinUser({ email, password }) {
   return function(dispatch) {
     axios.post(`${API_URL}/signin`, { email, password })
       .then(response => {
-        console.log(response);
-        dispatch({ type: AUTH_USER });
+        console.log('We are signed in!', response);
+        dispatch({ type: AUTH_USER, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/edit');
       })
@@ -28,7 +28,7 @@ export function signupUser({ name, email, password }) {
   return function(dispatch) {
     axios.post(`${API_URL}/signup`, { name, email, password })
       .then(response => {
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/edit');
       })

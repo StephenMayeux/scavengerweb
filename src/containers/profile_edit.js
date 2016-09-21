@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import * as actions from '../actions';
 
-export default class ProfileEdit extends Component {
+class ProfileEdit extends Component {
 
   /*/handleFormSubmit(formProps) {
     // call an action creator here
@@ -12,6 +13,7 @@ export default class ProfileEdit extends Component {
 
   render() {
     //const { handleSubmit, fields: { name, city, avatar }} = this.props
+    console.log('about to render profile', this.props.user.user.name);
     return (
       <div className="container">
         <div className="panel">
@@ -21,7 +23,7 @@ export default class ProfileEdit extends Component {
               <div className="form-group">
                 <label className="col-sm-3">Name</label>
                 <div className="col-sm-7">
-                  <input className="form-control" autoFocus />
+                  <input className="form-control" autoFocus value={this.props.user.user.name}/>
                 </div>
               </div>
               <div className="form-group">
@@ -32,6 +34,12 @@ export default class ProfileEdit extends Component {
               </div>
               <div className="form-group">
                 <label className="col-sm-3">City</label>
+                <div className="col-sm-7">
+                  <input className="form-control" />
+                </div>
+              </div>
+              <div className="form-group">
+                <label className="col-sm-3">Website</label>
                 <div className="col-sm-7">
                   <input className="form-control" />
                 </div>
@@ -55,6 +63,11 @@ export default class ProfileEdit extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return { user: state.auth }
+}
+
+export default connect(mapStateToProps)(ProfileEdit);
 
 // update fields
 /*export default reduxForm({
