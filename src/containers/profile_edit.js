@@ -6,14 +6,8 @@ import * as actions from '../actions';
 
 class ProfileEdit extends Component {
 
-  /*/handleFormSubmit(formProps) {
-    // call an action creator here
-    // this.props.someCreator(formProps);
-  }*/
-
   render() {
     //const { handleSubmit, fields: { name, city, avatar }} = this.props
-    console.log('about to render profile', this.props.user.user.name);
     return (
       <div className="container">
         <div className="panel">
@@ -23,25 +17,25 @@ class ProfileEdit extends Component {
               <div className="form-group">
                 <label className="col-sm-3">Name</label>
                 <div className="col-sm-7">
-                  <input className="form-control" autoFocus value={this.props.user.user.name}/>
+                  <input name="name" className="form-control" autoFocus defaultValue={this.props.user.user.name}/>
                 </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-3">Email</label>
                 <div className="col-sm-7">
-                  <input type="email" className="form-control" />
+                  <input name="email" type="email" className="form-control" defaultValue={this.props.user.user.email}/>
                 </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-3">City</label>
                 <div className="col-sm-7">
-                  <input className="form-control" />
+                  <input name="city" className="form-control" defaultValue={this.props.user.user.city}/>
                 </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-3">Website</label>
                 <div className="col-sm-7">
-                  <input className="form-control" />
+                  <input name="homepage" className="form-control" defaultValue={this.props.user.user.homepage}/>
                 </div>
               </div>
               <div className="form-group">
