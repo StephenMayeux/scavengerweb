@@ -14,8 +14,6 @@ export default function(state = {}, action) {
       return { ...state, error: action.payload };
     case FETCH_MESSAGE:
       return { ...state, message: action.payload };
-    case FETCH_PROFILES:
-      return { ...state, profiles: action.payload }
   }
   return state;
 }

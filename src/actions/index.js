@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE, FETCH_PROFILES } from './types';
 
 const API_URL = 'http://localhost:3000';
 
@@ -8,6 +8,7 @@ export function signinUser({ email, password }) {
   return function(dispatch) {
     axios.post(`${API_URL}/signin`, { email, password })
       .then(response => {
+        console.log(response);
         dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/feature');
@@ -57,11 +58,10 @@ export function fetchMessage() {
 }
 
 export function fetchProfiles() {
-  axios.get(`${API_URL}/profiles`)
-    .then(profiles => {
-      dispatch({
-        type: FETCH_PROFILES,
-        payload: profiles
-      });
-    });
+  const response = axios.get(`${API_URL}/profiles`);
+
+  return {
+    type: FETCH_PROFILES,
+    payload: response
+  };
 }

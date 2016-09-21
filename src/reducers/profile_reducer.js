@@ -1,9 +1,11 @@
 import { FETCH_PROFILES } from '../actions/types';
 
-export default function(state = {}, action) {
+const INITIAL_STATE = { allProfiles: [], profile: null }
+
+export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
     case FETCH_PROFILES:
-      return { ...state, allUsers: action.payload }
+      return { ...state, allProfiles: action.payload }
   }
   return state;
 }
