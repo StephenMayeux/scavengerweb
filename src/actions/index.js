@@ -50,6 +50,7 @@ export function signoutUser() {
   return { type: UNAUTH_USER };
 }
 
+// example of making auth'd requests
 export function fetchMessage() {
   axios.get(API_URL, {
     headers: { authorization: localStorage.getItem('token') }
@@ -76,4 +77,13 @@ export function fetchOneProfile(id) {
     type: FETCH_ONE_PROFILE,
     payload: response
   };
+}
+
+export function editUser(id, { name, email, city, homepage, avatar }) {
+  return function(dispatch) {
+    axios.put(`${API_URL}/profiles/${id}`, { name, email, city, homepage, avatar })
+      .then(response => {
+        browserHistory.push(`/profiles/${id}`);
+      });
+  }
 }

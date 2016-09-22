@@ -1,41 +1,45 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import * as actions from '../actions';
 
 class ProfileEdit extends Component {
+  handleFormSubmit(formProps) {
+    this.props.editUser(this.props.user.user._id, formProps);
+  }
 
   render() {
-    //const { handleSubmit, fields: { name, city, avatar }} = this.props
+    const { handleSubmit, fields: { name, email, city, homepage, avatar }} = this.props
+
     return (
       <div className="container">
         <div className="panel">
           <div className="panel-body">
-            <form className="form-horizontal">
+            <form className="form-horizontal" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
               <legend>Profile Information</legend>
               <div className="form-group">
                 <label className="col-sm-3">Name</label>
                 <div className="col-sm-7">
-                  <input name="name" className="form-control" autoFocus defaultValue={this.props.user.user.name}/>
+                  <input {...name} name="name" className="form-control" autoFocus defaultValue={this.props.user.user.name}/>
                 </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-3">Email</label>
                 <div className="col-sm-7">
-                  <input name="email" type="email" className="form-control" defaultValue={this.props.user.user.email}/>
+                  <input {...email} name="email" type="email" className="form-control" defaultValue={this.props.user.user.email}/>
+                  {email.touched && email.error && <div>{email.error}</div>}
                 </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-3">City</label>
                 <div className="col-sm-7">
-                  <input name="city" className="form-control" defaultValue={this.props.user.user.city}/>
+                  <input {...city} name="city" className="form-control" defaultValue={this.props.user.user.city}/>
                 </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-3">Website</label>
                 <div className="col-sm-7">
-                  <input name="homepage" className="form-control" defaultValue={this.props.user.user.homepage}/>
+                  <input {...homepage} name="homepage" className="form-control" defaultValue={this.props.user.user.homepage}/>
                 </div>
               </div>
               <div className="form-group">
@@ -57,14 +61,20 @@ class ProfileEdit extends Component {
   }
 }
 
+function validate(formProps) {
+  const errors = {};
+  if (!formProps.email) {
+    errors.email = 'An email is required'
+  }
+  return errors;
+}
+
 function mapStateToProps(state) {
   return { user: state.auth }
 }
 
-export default connect(mapStateToProps)(ProfileEdit);
-
-// update fields
-/*export default reduxForm({
+export default reduxForm({
   form: 'edit',
-  fields : ['name', 'city', 'avatar']
-}, null, actions)(ProfileEdit);*/
+  fields : ['name', 'email', 'city', 'homepage', 'avatar'],
+  validate
+}, mapStateToProps, actions)(ProfileEdit);
