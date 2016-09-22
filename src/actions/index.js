@@ -13,7 +13,6 @@ export function signinUser({ email, password }) {
   return function(dispatch) {
     axios.post(`${API_URL}/signin`, { email, password })
       .then(response => {
-        console.log('We are signed in!', response);
         dispatch({ type: AUTH_USER, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/edit');
@@ -64,19 +63,21 @@ export function fetchMessage() {
 }
 
 export function fetchProfiles() {
-  const response = axios.get(`${API_URL}/profiles`);
-  return {
-    type: FETCH_PROFILES,
-    payload: response
-  };
+  return function(dispatch) {
+    axios.get(`${API_URL}/profiles`)
+      .then(response => {
+        dispatch({ type: FETCH_PROFILES, payload: response });
+      });
+  }
 }
 
 export function fetchOneProfile(id) {
-  const response = axios.get(`${API_URL}/profiles/${id}`);
-  return {
-    type: FETCH_ONE_PROFILE,
-    payload: response
-  };
+  return function(dispatch) {
+    axios.get(`${API_URL}/profiles/${id}`)
+      .then(response => {
+        dispatch({ type: FETCH_ONE_PROFILE, payload: response });
+      });
+  }
 }
 
 export function editUser(id, { name, email, city, homepage, avatar }) {
