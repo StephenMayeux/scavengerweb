@@ -17,6 +17,7 @@ export function signinUser({ email, password }) {
         dispatch({ type: AUTH_USER });
         dispatch({ type: UPDATE_PROFILE, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('currentUser', JSON.stringify(response.data.user));
         browserHistory.push('/edit');
       })
       .catch(() => {
@@ -32,6 +33,7 @@ export function signupUser({ name, email, password }) {
         dispatch({ type: AUTH_USER });
         dispatch({ type: UPDATE_PROFILE, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('currentUser', JSON.stringify(response.data.user));
         browserHistory.push('/edit');
       })
       .catch(() => {
@@ -49,6 +51,7 @@ export function authError(error) {
 
 export function signoutUser() {
   localStorage.removeItem('token');
+  localStorage.removeItem('currentUser');
   return { type: UNAUTH_USER };
 }
 
@@ -88,6 +91,7 @@ export function editUser(id, { name, email, city, homepage, avatar }) {
     axios.put(`${API_URL}/profiles/${id}`, { name, email, city, homepage, avatar })
       .then(response => {
         console.log('about to dispatch', response);
+        localStorage.setItem('currentUser', JSON.stringify(response.data));
         dispatch({ type: UPDATE_PROFILE, payload: response.data })
         browserHistory.push(`/profiles/${id}`);
       });

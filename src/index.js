@@ -14,14 +14,16 @@ import Signup from './containers/signup';
 import Signin from './containers/signin';
 import Signout from './containers/signout';
 import reducers from './reducers';
-import { AUTH_USER } from './actions/types';
+import { AUTH_USER, UPDATE_PROFILE } from './actions/types';
 
 const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 const token = localStorage.getItem('token');
-if (token) {
+const currentUser = localStorage.getItem('currentUser');
+if (token && currentUser) {
   store.dispatch({ type: AUTH_USER });
+  store.dispatch({ type: UPDATE_PROFILE, payload: JSON.parse(currentUser) })
 }
 
 ReactDOM.render(
