@@ -8,7 +8,7 @@ import Dropzone from 'react-dropzone';
 class ProfileEdit extends Component {
   constructor(props) {
     super(props);
-    const { name, email, city, homepage, avatar } = props.user.user;
+    const { name, email, city, homepage, avatar } = props.user;
     this.state = {
       name,
       email,
@@ -28,13 +28,11 @@ class ProfileEdit extends Component {
   }
 
   onDrop(file) {
-    const image = file[0].preview;
-    this.setState({ avatar: image }, () => {
-      console.log(this.state.avatar);
-    });
+    this.setState({ avatar: file[0].preview });
   }
 
   render() {
+    console.log('i am rendering!');
     return (
       <div className="container">
         <div className="panel">
@@ -79,12 +77,12 @@ class ProfileEdit extends Component {
               <legend>Profile Picture</legend>
               <div className="row">
                 <div className="col-sm-5">
-                  <Dropzone onDrop={this.onDrop} multiple={false}>
+                  <Dropzone onDrop={this.onDrop.bind(this)} multiple={false}>
                     <div>Drag an image here, or click to select an image to upload.</div>
                   </Dropzone>
                 </div>
                 <div className="col-sm-7">
-                  {this.renderAvatar()}
+                  <img src={this.state.avatar} className="img-responsive img-circle" />
                 </div>
               </div>
             </form>
@@ -96,7 +94,7 @@ class ProfileEdit extends Component {
 }
 
 function mapStateToProps(state) {
-  return { user: state.profiles }
+  return { user: state.profiles.user }
 }
 
 export default connect(mapStateToProps, actions)(ProfileEdit);
