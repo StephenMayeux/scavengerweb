@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import Dropzone from 'react-dropzone';
 
 class ProfileEdit extends Component {
   constructor(props) {
@@ -24,6 +25,13 @@ class ProfileEdit extends Component {
   handleFormSubmit(event) {
     event.preventDefault();
     this.props.editUser(this.props.user.user._id, this.state);
+  }
+
+  onDrop(file) {
+    const image = file[0].preview;
+    this.setState({ avatar: image }, () => {
+      console.log(this.state.avatar);
+    });
   }
 
   render() {
@@ -58,14 +66,25 @@ class ProfileEdit extends Component {
                 </div>
               </div>
               <div className="form-group">
-                <label className="col-sm-3">Profile Image</label>
-                <div className="col-sm-4">
-                  <img src="/" width="100" height="100" className="profile"/>
-                </div>
-              </div>
-              <div className="form-group">
                 <div className="col-sm-offset-3 col-sm-4">
                   <button type="submit" className="btn btn-success">Update Profile</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="panel">
+          <div className="panel-body">
+            <form className="form-horizontal">
+              <legend>Profile Picture</legend>
+              <div className="row">
+                <div className="col-sm-5">
+                  <Dropzone onDrop={this.onDrop} multiple={false}>
+                    <div>Drag an image here, or click to select an image to upload.</div>
+                  </Dropzone>
+                </div>
+                <div className="col-sm-7">
+                  {this.renderAvatar()}
                 </div>
               </div>
             </form>
