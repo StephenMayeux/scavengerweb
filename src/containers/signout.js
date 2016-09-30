@@ -9,8 +9,12 @@ class Signout extends Component {
 
   render() {
     return (
-      <div className="alert alert-success">
-        <p>You have signed out. See you again!</p>
+      <div>
+        <div className="alert alert-success">
+          <p>You have signed out. See you again!</p>
+        </div>
+        <h2>Ready for an upgrade?</h2>
+        <p className="lead">Important sales conversion copy here!</p>
       </div>
     );
   }
