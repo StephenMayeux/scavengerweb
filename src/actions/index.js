@@ -8,7 +8,7 @@ import { AUTH_USER,
         FETCH_ONE_PROFILE,
         UPDATE_PROFILE } from './types';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://sandboxauthserver.herokuapp.com/';
 
 export function signinUser({ email, password }) {
   return function(dispatch) {
