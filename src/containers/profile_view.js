@@ -7,15 +7,34 @@ class ProfileView extends Component {
     this.props.fetchOneProfile(this.props.params.id);
   }
 
+  renderProfile(infos) {
+    return infos.map(info => {
+      if (info) {
+        return <p className="lead" key={info}>{info}</p>;
+      }
+    });
+  }
+
   render() {
     if (!this.props.userProfile) {
-      return <div>Loading...</div>
+      return <div>Loading Profile...</div>
     } else {
-      const { name, email, city } = this.props.userProfile.data;
+      const { name, email, city, homepage, avatar } = this.props.userProfile.data;
       return (
-        <div>
-          <h3>{name}</h3>
-          <p className="lead">{email}</p>
+        <div className="col-sm-offset-2 col-sm-8">
+          <div className="panel">
+            <div className="panel-body">
+               <legend>{name}</legend>
+               <div className="row">
+                 <div className="col-sm-3">
+                   <img src={avatar} className="img-rounded img-responsive" />
+                 </div>
+                 <div className="col-sm-9">
+                   {this.renderProfile([email, city, homepage])}
+                 </div>
+               </div>
+            </div>
+          </div>
         </div>
       );
     }

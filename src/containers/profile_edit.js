@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
 import Dropzone from 'react-dropzone';
+import request from 'superagent';
+
+import * as actions from '../actions';
+
+const CLOUDINARY_PRESET = 'caemikql';
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/sandboxauth/upload';
+const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 class ProfileEdit extends Component {
   constructor(props) {
@@ -24,11 +29,26 @@ class ProfileEdit extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    this.props.editUser(this.props.user.user._id, this.state);
+    console.log('about to dispatch action', this.state);
+    this.props.editUser(this.props.user._id, this.state);
   }
 
   onDrop(file) {
-    this.setState({ avatar: file[0].preview });
+    this.handleImageUpload(file[0]);
+  }
+
+  handleImageUpload(image) {
+    let upload = request.post(CLOUDINARY_URL)
+                        .field('upload_preset', CLOUDINARY_PRESET)
+                        .field('file', image);
+    upload.end((err, response) => {
+      if (err) {
+        console.log(err);
+      }
+      if (response.body.secure_url) {
+        this.setState({ avatar:  response.body.secure_url });
+      }
+    });
   }
 
   render() {
@@ -64,25 +84,16 @@ class ProfileEdit extends Component {
                 </div>
               </div>
               <div className="form-group">
-                <div className="col-sm-offset-3 col-sm-4">
-                  <button type="submit" className="btn btn-success">Update Profile</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <form className="form-horizontal">
-              <legend>Profile Picture</legend>
-              <div className="row">
-                <div className="col-sm-5">
-                  <Dropzone onDrop={this.onDrop.bind(this)} multiple={false}>
+                <label className="col-sm-3">Profile Picture</label>
+                <div className="col-sm-7">
+                  <Dropzone onDrop={this.onDrop.bind(this)} multiple={false} accept="image/*" >
                     <div>Drag an image here, or click to select an image to upload.</div>
                   </Dropzone>
                 </div>
-                <div className="col-sm-7">
-                  <img src={this.state.avatar} className="img-responsive img-circle" />
+              </div>
+              <div className="form-group">
+                <div className="col-sm-offset-3 col-sm-4">
+                  <button type="submit" className="btn btn-success">Update Profile</button>
                 </div>
               </div>
             </form>

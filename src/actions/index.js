@@ -15,10 +15,10 @@ export function signinUser({ email, password }) {
     axios.post(`${API_URL}/signin`, { email, password })
       .then(response => {
         dispatch({ type: AUTH_USER });
-        dispatch({ type: UPDATE_PROFILE, payload: response.data.user });
+        dispatch({ type: UPDATE_PROFILE, payload: response.data.user }); // do I need this?
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('currentUser', JSON.stringify(response.data.user));
-        browserHistory.push('/edit');
+        browserHistory.push(`/profiles/${response.data.user._id}`);
       })
       .catch(() => {
         dispatch(authError('Bad Login Info'));
@@ -53,19 +53,6 @@ export function signoutUser() {
   localStorage.removeItem('token');
   localStorage.removeItem('currentUser');
   return { type: UNAUTH_USER };
-}
-
-// example of making auth'd requests
-export function fetchMessage() {
-  axios.get(API_URL, {
-    headers: { authorization: localStorage.getItem('token') }
-  })
-  .then(response => {
-    dispatch({
-      type: FETCH_MESSAGE,
-      payload: response.data.message
-    });
-  });
 }
 
 export function fetchProfiles() {
