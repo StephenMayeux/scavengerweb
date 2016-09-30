@@ -52,7 +52,7 @@ class ProfileEdit extends Component {
   }
 
   render() {
-    console.log('i am rendering!');
+    const style = { borderWidth: 2, borderColor: 'black', borderStyle: 'dashed', borderRadius: 4, padding: 30, width: 200, height: 200 };
     return (
       <div className="container">
         <div className="panel">
@@ -85,10 +85,13 @@ class ProfileEdit extends Component {
               </div>
               <div className="form-group">
                 <label className="col-sm-3">Profile Picture</label>
-                <div className="col-sm-7">
-                  <Dropzone onDrop={this.onDrop.bind(this)} multiple={false} accept="image/*" >
+                <div className="col-sm-3">
+                  <Dropzone style={style} onDrop={this.onDrop.bind(this)} multiple={false} accept="image/*" >
                     <div>Drag an image here, or click to select an image to upload.</div>
                   </Dropzone>
+                </div>
+                <div className="col-sm-6">
+                  {this.state.avatar ? <img src={this.state.avatar} className="img-circle img-responsive" /> : <p>upload an image</p>}
                 </div>
               </div>
               <div className="form-group">
