@@ -6,7 +6,8 @@ import { AUTH_USER,
         FETCH_MESSAGE,
         FETCH_PROFILES,
         FETCH_ONE_PROFILE,
-        UPDATE_PROFILE } from './types';
+        UPDATE_PROFILE,
+        CLEAR_PROFILE } from './types';
 
 const API_URL = 'https://sandboxauthserver.herokuapp.com';
 
@@ -82,5 +83,11 @@ export function editUser(id, { name, email, city, homepage, avatar }) {
         dispatch({ type: UPDATE_PROFILE, payload: response.data })
         browserHistory.push(`/profiles/${id}`);
       });
+  }
+}
+
+export function clearProfile() {
+  return function(dispatch) {
+    dispatch({ type: CLEAR_PROFILE });
   }
 }

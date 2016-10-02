@@ -5,3 +5,4 @@ export const FETCH_MESSAGE = 'fetch_message';
 export const FETCH_PROFILES = 'fetch_profiles';
 export const FETCH_ONE_PROFILE = 'fetch_one_profile';
 export const UPDATE_PROFILE = 'update_profile';
+export const CLEAR_PROFILE = 'clear_profile';

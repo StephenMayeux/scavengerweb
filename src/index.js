@@ -16,6 +16,7 @@ import Signout from './containers/signout';
 import reducers from './reducers';
 import { AUTH_USER, UPDATE_PROFILE } from './actions/types';
 
+
 const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 

@@ -4,6 +4,7 @@ import * as actions from '../actions';
 
 class ProfileView extends Component {
   componentWillMount() {
+    this.props.clearProfile();
     this.props.fetchOneProfile(this.props.params.id);
   }
 
