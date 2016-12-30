@@ -1,12 +1,12 @@
 {
-  "name": "sandbox-client-server",
+  "name": "scavengerweb",
   "version": "1.0.0",
-  "description": "Client for React/Redux application",
+  "description": "Client for ScavengerHunt React/Redux application",
   "main": "index.js",
-  "repository": "git@github.com:StephenMayeux/sandbox_client_server.git",
+  "repository": "git@github.com:StephenMayeux/scavengerweb.git",
   "engines": {
-    "node": "5.5.0",
-    "npm": "3.3.12"
+    "node": "7.3.0",
+    "npm": "3.10.10"
   },
   "scripts": {
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
