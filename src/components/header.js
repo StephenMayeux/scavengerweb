@@ -4,17 +4,18 @@ import { connect } from 'react-redux';
 
 const active = { borderBottomColor: '#3f51b5' };
 
+// TODO: figure out activeStyle shit
 class Header extends Component {
   renderRightMenu() {
     if (this.props.authenticated) {
       return [
-        <li key={1}><Link to="/edit" activeStyle={active}>Edit Profile</Link></li>,
+        <li key={1}><Link to="/edit" activeClassName="active">Edit Profile</Link></li>,
         <li key={2}><Link to="/signout">Sign out</Link></li>
       ];
     } else {
       return [
-        <li key={3}><Link to="/signin" activeStyle={active}>Sign in</Link></li>,
-        <li key={4}><Link to="/signup" activeStyle={active}>Sign up</Link></li>
+        <li key={3}><Link to="/signin" activeClassName="active">Sign in</Link></li>,
+        <li key={4}><Link to="/signup" activeClassName="active">Sign up</Link></li>
       ];
     }
   }
@@ -30,11 +31,11 @@ class Header extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <IndexLink to="/" className="navbar-brand">Stephen's Project</IndexLink>
+            <IndexLink to="/" className="navbar-brand">ScavengerHunt</IndexLink>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
-              <li><IndexLink to="/" activeStyle={active}>Home</IndexLink></li>
+              <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
               {this.renderRightMenu()}
