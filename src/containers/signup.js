@@ -19,7 +19,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { handleSubmit, fields: { name, email, password, passwordConfirm }} = this.props;
+    const { handleSubmit, fields: { firstname, lastname, email, password, passwordConfirm }} = this.props;
 
     return (
       <div className="login-container container">
@@ -28,13 +28,18 @@ class Signup extends Component {
             <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
               <legend>Create an account</legend>
               <div className="form-group">
-                <label>Name</label>
-                <input className="form-control" {...name} autoFocus placeholder="John Smith" />
-                {name.touched && name.error && <div>{name.error}</div>}
+                <label>First Name</label>
+                <input className="form-control" {...firstname} autoFocus placeholder="Barack" />
+                {firstname.touched && firstname.error && <div>{firstname.error}</div>}
+              </div>
+              <div className="form-group">
+                <label>Last Name</label>
+                <input className="form-control" {...lastname} placeholder="Obama" />
+                {lastname.touched && lastname.error && <div>{lastname.error}</div>}
               </div>
               <div className="form-group">
                 <label>Email</label>
-                <input type="email" className="form-control" {...email} placeholder="jsmith@example.com" />
+                <input type="email" className="form-control" {...email} placeholder="bobama@example.com" />
                 {email.touched && email.error && <div>{email.error}</div>}
               </div>
               <div className="form-group">
@@ -85,6 +90,6 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   form: 'signup',
-  fields: ['name', 'email', 'password', 'passwordConfirm'],
+  fields: ['firstname', 'lastname', 'email', 'password', 'passwordConfirm'],
   validate
 }, mapStateToProps, actions)(Signup);

@@ -7,7 +7,7 @@ import reduxThunk from 'redux-thunk';
 import promise from 'redux-promise';
 
 import App from './components/app';
-import Profiles from './containers/profiles';
+import Home from './containers/home';
 import ProfileView from './containers/profile_view';
 import ProfileEdit from './containers/profile_edit'; // should be protected with HOC
 import Signup from './containers/signup';
@@ -31,7 +31,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={Profiles} />
+        <IndexRoute component={Home} />
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
         <Route path="signout" component={Signout} />

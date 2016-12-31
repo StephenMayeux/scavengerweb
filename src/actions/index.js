@@ -9,11 +9,12 @@ import { AUTH_USER,
         UPDATE_PROFILE,
         CLEAR_PROFILE } from './types';
 
-const API_URL = 'https://sandboxauthserver.herokuapp.com';
+const API_URL = 'http://localhost:3000';
+//const API_URL = 'https://sandboxauthserver.herokuapp.com';
 
 export function signinUser({ email, password }) {
   return function(dispatch) {
-    axios.post(`${API_URL}/signin`, { email, password })
+    axios.post(`${API_URL}/user/signin`, { email, password })
       .then(response => {
         dispatch({ type: AUTH_USER });
         dispatch({ type: UPDATE_PROFILE, payload: response.data.user }); // do I need this?
@@ -27,15 +28,15 @@ export function signinUser({ email, password }) {
   }
 }
 
-export function signupUser({ name, email, password }) {
+export function signupUser({ firstname, lastname, email, password }) {
   return function(dispatch) {
-    axios.post(`${API_URL}/signup`, { name, email, password })
+    axios.post(`${API_URL}/user/signup`, { firstname, lastname, email, password })
       .then(response => {
         dispatch({ type: AUTH_USER });
         dispatch({ type: UPDATE_PROFILE, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('currentUser', JSON.stringify(response.data.user));
-        browserHistory.push('/edit');
+        browserHistory.push('/');
       })
       .catch(() => {
         dispatch(authError('Email in use'));
@@ -74,14 +75,13 @@ export function fetchOneProfile(id) {
   }
 }
 
-export function editUser(id, { name, email, city, homepage, avatar }) {
+export function editUser(id, { firstname, lastname }) {
   return function(dispatch) {
-    axios.put(`${API_URL}/profiles/${id}`, { name, email, city, homepage, avatar })
+    axios.put(`${API_URL}/user/profiles/${id}`, { firstname, lastname })
       .then(response => {
-        console.log('about to dispatch', response);
-        localStorage.setItem('currentUser', JSON.stringify(response.data));
-        dispatch({ type: UPDATE_PROFILE, payload: response.data })
-        browserHistory.push(`/profiles/${id}`);
+        localStorage.setItem('currentUser', JSON.stringify(response.data.profile));
+        dispatch({ type: UPDATE_PROFILE, payload: response.data.profile })
+        browserHistory.push(`/`);
       });
   }
 }
